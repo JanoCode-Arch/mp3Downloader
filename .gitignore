@@ -4,3 +4,9 @@
 # Basura temporal de Python
 __pycache__/
 *.pyc
+.pytest_cache/
+
+# Artefactos de PyInstaller (el .exe se genera, no se sube)
+build/
+dist/
+*.spec

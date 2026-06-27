@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 import threading
 from pathlib import Path
 from tkinter import filedialog
@@ -23,12 +24,23 @@ FUENTE_BOTON = ("Segoe UI Semibold", 14)
 # Archivo donde recordamos preferencias entre sesiones
 CONFIG = Path.home() / ".downloadermp3.json"
 
+
+def recurso(rel):
+    """Ruta a un archivo incluido. Funciona en desarrollo y dentro del .exe (PyInstaller)."""
+    base = getattr(sys, "_MEIPASS", Path(__file__).parent)
+    return Path(base) / rel
+
 # ----- Ventana -----
 ctk.set_appearance_mode("dark")
 app = ctk.CTk()
 app.title("DownloaderMP3: ByJano")
 app.geometry("480x640")
 app.configure(fg_color=FONDO)
+
+# Icono de la ventana (y de la barra de tareas)
+ICONO = recurso("icono.ico")
+if ICONO.exists():
+    app.iconbitmap(str(ICONO))
 
 
 # ----- Configuración (persistencia con JSON) -----
