@@ -18,3 +18,8 @@ def test_construir_opciones_es_mp3():
     post = opts["postprocessors"][0]
     assert post["preferredcodec"] == "mp3"
     assert post["preferredquality"] == "0"
+
+def test_construir_opciones_mp4_es_video():
+    opts = construir_opciones("c", "d", None, "mp4")
+    assert opts["merge_output_format"] == "mp4"
+    assert "postprocessors" not in opts  # mp4 no extrae audio
